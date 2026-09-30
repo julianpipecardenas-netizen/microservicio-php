@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.0",
+  "info": { "title": "Microservicio PHP - Comentarios", "version": "1.0.0" },
+  "paths": {
+    "/comentarios": {
+      "post": {
+        "summary": "Insertar comentario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre_cliente": { "type": "string" },
+                  "comentario": { "type": "string" },
+                  "calificacion": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Creado" }, "400": { "description": "Faltan datos" } }
+      }
+    },
+    "/comentarios/{id}": {
+      "put": {
+        "summary": "Actualizar comentario",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "200": { "description": "Actualizado" } }
+      },
+      "delete": {
+        "summary": "Eliminar comentario",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": { "204": { "description": "Eliminado" } }
+      }
+    }
+  }
+}

@@ -1,4 +1,12 @@
 <?php
+
+if (php_sapi_name() === 'cli-server') {
+    $ruta_solicitada = realpath(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    if ($ruta_solicitada && is_file($ruta_solicitada) && strpos($ruta_solicitada, __DIR__) === 0) {
+        return false; // deja que el servidor sirva el archivo tal cual (HTML, JSON, etc.)
+    }
+}
+
 header("Content-Type: application/json");
 
 $supabaseUrl = getenv("SUPABASE_URL");
